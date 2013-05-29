@@ -369,7 +369,7 @@ let Tlist_Ctags_Cmd = 'ctags'
 
 " Make Vim use RVM correctly when using Zsh
 " https://rvm.beginrescueend.com/integration/vim/
-" set shell=/bin/sh
+set shell=/bin/sh
 
 " Finally, load custom configs
 if filereadable(my_home . '.vimrc.local')
