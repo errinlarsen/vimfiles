@@ -53,7 +53,7 @@ hi ModeMsg              ctermfg=4           ctermbg=NONE        cterm=NONE
 
 if version >= 700 " Vim 7.x specific colors
   hi CursorLine         ctermfg=NONE        ctermbg=8           cterm=NONE
-  hi CursorColumn       ctermfg=NONE        ctermbg=NONE        cterm=NONE
+  hi CursorColumn       ctermfg=NONE        ctermbg=8           cterm=NONE
   hi ColorColumn        ctermfg=NONE        ctermbg=1           cterm=NONE
   hi TabLine            ctermfg=13          ctermbg=NONE        cterm=NONE
   hi TabLineFill        ctermfg=NONE        ctermbg=NONE        cterm=NONE

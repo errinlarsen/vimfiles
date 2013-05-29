@@ -10,7 +10,7 @@ silent! runtime bundles.vim
 "  General
 "  ---------------------------------------------------------------------------
 
-filetype plugin indent on     
+filetype plugin indent on
 let mapleader = ","
 let g:mapleader = ","
 set modelines=0
@@ -36,7 +36,12 @@ set hidden
 set wildmenu
 set wildmode=list:longest
 set visualbell
+
+" highlight the current line
 set cursorline
+" Highlight active column
+set cursorcolumn
+
 set ttyfast
 set ruler
 set backspace=indent,eol,start
@@ -88,7 +93,7 @@ set statusline+=\ %{fugitive#statusline()}
 " encoding
 set statusline+=\ [%{strlen(&fenc)?&fenc:&enc}]
 " rvm
-set statusline+=\ %{rvm#statusline()}
+" set statusline+=\ %{rvm#statusline()}
 " line x of y
 set statusline+=\ [line\ %l\/%L]
 
@@ -112,7 +117,7 @@ set incsearch
 set showmatch
 set hlsearch
 " turn search highlight off
-nnoremap <leader><space> :noh<cr> 
+nnoremap <leader><space> :noh<cr>
 " search (forwards)
 nmap <space> /
 " search (backwards)
@@ -147,7 +152,7 @@ imap jj <ESC>
 set grepprg=ack
 
 " ,a to Ack (search in files)
-nnoremap <leader>a :Ack 
+nnoremap <leader>a :Ack
 
 " Ack settings: https://github.com/krisleech/vimfiles/wiki/Make-ack-ignore-files
 
@@ -193,16 +198,16 @@ nmap <leader><Esc> :q!<CR>
 " EXTERNAL COPY / PASTE
 " Press F2 before and after pasting from an external Window, not required for
 " MacVim
-set pastetoggle=<F2>
-map <C-v> "+gP<CR>
-vmap <C-c> "+y
+" set pastetoggle=<F2>
+" map <C-v> "+gP<CR>
+" vmap <C-c> "+y
 
 "  ---------------------------------------------------------------------------
 "  Function Keys
 "  ---------------------------------------------------------------------------
 
 " F2 - Terminal
-map <F2> :ConqueTerm zsh<CR>
+" map <F2> :ConqueTerm zsh<CR>
 
 " F3 - YankRing
 nnoremap <silent> <F3> :YRShow<cr>
@@ -234,7 +239,7 @@ let NERDChristmasTree = 1
 let NERDTreeWinPos = "left"
 let NERDTreeHijackNetrw = 1
 let NERDTreeQuitOnOpen = 1
-let NERDTreeWinSize = 50 
+let NERDTreeWinSize = 50
 let NERDTreeChDirMode = 2
 let NERDTreeDirArrows = 1
 " open file browser
@@ -248,7 +253,7 @@ map <leader>l :TlistToggle <cr>
 let Tlist_Use_Right_Window = 1
 let Tlist_WinWidth = 60
 " Generate ctags for all bundled gems as well
-map <leader>rt :!ctags --extra=+f --languages=-javascript --exclude=.git --exclude=log -R * `rvm gemdir`/gems/* `rvm gemdir`/bundler/gems/*<CR><C-M>
+" map <leader>rt :!ctags --extra=+f --languages=-javascript --exclude=.git --exclude=log -R * `rvm gemdir`/gems/* `rvm gemdir`/bundler/gems/*<CR><C-M>
 
 " Use only current file to autocomplete from tags
 " set complete=.,t
@@ -258,8 +263,8 @@ set complete=.,w,b,u,t,i
 nmap <silent> <leader>b :FufBuffer<CR>
 
 " AutoClose
-let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"', "'": "'", '#{': '}'} 
-let g:AutoCloseProtectedRegions = ["Character"] 
+let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"', "'": "'", '#{': '}'}
+let g:AutoCloseProtectedRegions = ["Character"]
 
 let my_home = expand("$HOME/")
 
@@ -314,9 +319,9 @@ map <leader>gr :topleft :split config/routes.rb<cr>
 map <leader>gg :topleft 100 :split Gemfile<cr>
 
 " Skip to Model, View or Controller
-map <Leader>m :Rmodel 
-map <Leader>v :Rview 
-map <Leader>c :Rcontroller 
+map <Leader>m :Rmodel
+map <Leader>v :Rview
+map <Leader>c :Rcontroller
 
 " Other files to consider Ruby
 au BufRead,BufNewFile Gemfile,Rakefile,Thorfile,config.ru,Vagrantfile,Guardfile,Capfile set ft=ruby
@@ -346,7 +351,7 @@ if has("gui_running")
   set guioptions-=R " no scrollbar on the right
   set guioptions-=l " no scrollbar on the left
   set guioptions-=b " no scrollbar on the bottom
-  set guioptions=aiA 
+  set guioptions=aiA
   set mouse=v
   set guifont=Source\ Code\ Pro:h12 "<- Maybe a good idea when using mac
 endif
@@ -364,7 +369,7 @@ let Tlist_Ctags_Cmd = 'ctags'
 
 " Make Vim use RVM correctly when using Zsh
 " https://rvm.beginrescueend.com/integration/vim/
-set shell=/bin/sh
+" set shell=/bin/sh
 
 " Finally, load custom configs
 if filereadable(my_home . '.vimrc.local')
@@ -378,3 +383,13 @@ endif
 " When vimrc, either directly or via symlink, is edited, automatically reload it
 autocmd! bufwritepost .vimrc source %
 autocmd! bufwritepost vimrc source %
+
+" Trailing whitespace stuff
+match ErrorMsg '\s\+$'
+nnoremap <Leader>rtw :%s/\s\+$//e<CR>
+
+" Custom Tabular stuff
+if exists(":Tab")
+  :AddTabularPattern first_colon /^[^:]*\zs:/l1c0l0
+  :AddTabularPattern hash_keys /^[^:]*\zs:/r0c1l0
+endif
