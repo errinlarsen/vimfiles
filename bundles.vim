@@ -32,7 +32,8 @@ Bundle "git://github.com/vim-scripts/Gist.vim.git"
 Bundle "git://github.com/vim-scripts/L9.git"
 Bundle "git://github.com/Bogdanp/rbrepl.vim.git"
 Bundle "git://github.com/rson/vim-conque.git"
-Bundle "git://github.com/wincent/Command-T.git"
+Bundle 'git://git.wincent.com/command-t.git'
+Bundle 'git://github.com/altercation/vim-colors-solarized.git'
 Bundle "git://github.com/kana/vim-textobj-user.git"
 Bundle "git://github.com/nelstrom/vim-textobj-rubyblock.git"
 Bundle "git://github.com/ervandew/supertab.git"
@@ -44,6 +45,10 @@ Bundle "git://github.com/tpope/vim-haml.git"
 Bundle "git://github.com/tpope/vim-markdown.git"
 Bundle "git://github.com/greyblake/vim-preview.git"
 Bundle "git://github.com/tpope/vim-bundler.git"
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "honza/vim-snippets"
+Bundle "garbas/vim-snipmate"
 
 filetype plugin indent on     " and turn it back on!
 
