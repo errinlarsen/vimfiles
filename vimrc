@@ -1,14 +1,14 @@
 set nocompatible               " be iMproved
 
-"  ---------------------------------------------------------------------------
+" ---------------------------------------------------------------------------
 "  Plugins
-"  ---------------------------------------------------------------------------
+" ---------------------------------------------------------------------------
 
 silent! runtime bundles.vim
 
-"  ---------------------------------------------------------------------------
+" ---------------------------------------------------------------------------
 "  General
-"  ---------------------------------------------------------------------------
+" ---------------------------------------------------------------------------
 
 filetype plugin indent on
 let mapleader = ","
@@ -21,9 +21,9 @@ set noswapfile
 syntax enable
 set autoread
 
-"  ---------------------------------------------------------------------------
+" ---------------------------------------------------------------------------
 "  UI
-"  ---------------------------------------------------------------------------
+" ---------------------------------------------------------------------------
 
 set title
 set encoding=utf-8
@@ -50,20 +50,21 @@ set number
 set undofile
 
 " Auto adjust window sizes when they become current
-set winwidth=84
-set winheight=5
-set winminheight=5
-set winheight=999
+" set winwidth=84
+" set winheight=5
+" set winminheight=5
+" set winheight=999
 
-colorscheme railscasts-term
-set background=dark " or light
+" ---------------------------------------------------------------------------
+"  Color scheme
+" ---------------------------------------------------------------------------
 set t_Co=256
+set background=dark " light is default
+let base16colorspace=256
+colorscheme base16-railscasts
+" colorscheme railscasts-term
 
 set splitbelow splitright
-
-"  ---------------------------------------------------------------------------
-"  Text Formatting
-"  ---------------------------------------------------------------------------
 
 set tabstop=2
 set shiftwidth=2
@@ -80,34 +81,9 @@ if exists("+colorcolumn")
   set colorcolumn=80
 endif
 
-"  ---------------------------------------------------------------------------
-"  Status Line
-"  ---------------------------------------------------------------------------
-
-" path
-set statusline=%f
-" flags
-set statusline+=%m%r%h%w
-" git branch
-set statusline+=\ %{fugitive#statusline()}
-" encoding
-set statusline+=\ [%{strlen(&fenc)?&fenc:&enc}]
-" rvm
-" set statusline+=\ %{rvm#statusline()}
-" line x of y
-set statusline+=\ [line\ %l\/%L]
-
-" Colour
-hi StatusLine ctermfg=Black ctermbg=White
-
-" Change colour of statusline in insert mode
-au InsertEnter * hi StatusLine ctermbg=DarkBlue
-au InsertLeave * hi StatusLine ctermfg=Black ctermbg=White
-
-"  ---------------------------------------------------------------------------
+" ---------------------------------------------------------------------------
 "  Mappings
-"  ---------------------------------------------------------------------------
-
+" ---------------------------------------------------------------------------
 " Searching / moving
 nnoremap / /\v
 vnoremap / /\v
@@ -132,7 +108,8 @@ imap <C-l> <ESC>$
 
 " Turn off arrow keys (this might not be a good idea for beginners, but it is
 " the best way to ween yourself of arrow keys on to hjkl)
-" http://yehudakatz.com/2010/07/29/everyone-who-tried-to-convince-me-to-use-vim-was-wrong/
+" http://yehudakatz.com/2010/07/29/
+" \ everyone-who-tried-to-convince-me-to-use-vim-was-wrong/
 nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
@@ -142,6 +119,7 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
+" Change up/down
 nnoremap j gj
 nnoremap k gk
 
@@ -149,8 +127,7 @@ nnoremap k gk
 imap jj <ESC>
 
 " ACK
-set grepprg=ack
-
+" set grepprg=ack
 " ,a to Ack (search in files)
 nnoremap <leader>a :Ack
 
@@ -169,13 +146,6 @@ nnoremap <C-l> <C-w>l
 " map <C-J> :m +1 <CR>
 " map <C-K> :m -2 <CR>
 
-" Switch between buffers
-noremap <tab> :bn<CR>
-noremap <S-tab> :bp<CR>
-" close buffer
-nmap <leader>d :bd<CR>
-" close all buffers
-nmap <leader>D :bufdo bd<CR>
 
 " Switch between last two buffers
 nnoremap <leader><leader> <c-^>
@@ -191,49 +161,45 @@ set wildignore=.svn,CVS,.git,*.swp,*.jpg,*.png,*.gif,*.pdf,*.bak
 set suffixes+=.old
 
 " Saving and exit
-nmap <leader>q :wqa!<CR>
-nmap <leader>w :w!<CR>
-nmap <leader><Esc> :q!<CR>
+" nmap <leader>q :wqa!<CR>
+" nmap <leader>w :w!<CR>
+" nmap <leader><Esc> :q!<CR>
 
-" EXTERNAL COPY / PASTE
-" Press F2 before and after pasting from an external Window, not required for
-" MacVim
-" set pastetoggle=<F2>
-" map <C-v> "+gP<CR>
-" vmap <C-c> "+y
-
-"  ---------------------------------------------------------------------------
+" ---------------------------------------------------------------------------
 "  Function Keys
-"  ---------------------------------------------------------------------------
-
+" ---------------------------------------------------------------------------
 " F2 - Terminal
 " map <F2> :ConqueTerm zsh<CR>
 
 " F3 - YankRing
-nnoremap <silent> <F3> :YRShow<cr>
-inoremap <silent> <F3> <ESC>:YRShow<cr>
+" nnoremap <silent> <F3> :YRShow<cr>
+" inoremap <silent> <F3> <ESC>:YRShow<cr>
 
 " Press F5 to toggle GUndo tree
 nnoremap <F5> :GundoToggle<CR>
 
 " indent file and return cursor and center cursor
-map   <silent> <F6> mmgg=G`m^zz
-imap  <silent> <F6> <Esc> mmgg=G`m^zz
+map   <silent> <F6> mmgg=G'mzz
+imap  <silent> <F6> <Esc> mmgg=G'mzz
 
-"  ---------------------------------------------------------------------------
+
+"  ===========================================================================
 "  Plugins
-"  ---------------------------------------------------------------------------
+"  ===========================================================================
 
+" ---------------------------------------------------------------------------
 " Command-T
+" ---------------------------------------------------------------------------
 " find file
 map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
-
 " find file in current directory
 map <leader>gf :CommandTFlush<cr>\|:CommandT %%<cr>
 
 let g:CommandTMaxHeight = 20
 
+" ---------------------------------------------------------------------------
 " NERDTree
+" ---------------------------------------------------------------------------
 let NERDTreeShowBookmarks = 0
 let NERDChristmasTree = 1
 let NERDTreeWinPos = "left"
@@ -245,7 +211,28 @@ let NERDTreeDirArrows = 1
 " open file browser
 map <leader>p :NERDTreeToggle<cr>
 
+" ---------------------------------------------------------------------------
+" MiniBufExpl
+" ---------------------------------------------------------------------------
+" let g:miniBufExplBRSplit = 0
+let g:miniBufExplBuffersNeeded = 1
+" Focus into the MBE window
+noremap <leader>b :MBEFocus<cr>
+" Switch between buffers
+noremap <tab> :MBEbn<cr>
+noremap <S-tab> :MBEbp<cr>
+" close buffer
+noremap <leader>d :MBEbd<cr>
+" close all buffers
+" nmap <leader>da :bufdo bd<CR>
+" unload buffer
+noremap <leader>u :MBEbun<cr>
+" wipeout buffer
+noremap <leader>D :MBEbw<cr>
+
+" ---------------------------------------------------------------------------
 " TagList
+" ---------------------------------------------------------------------------
 set tags=./tags;
 " Support for https://github.com/ivalkeen/guard-ctags-bundler
 set tags+=gems.tags
@@ -254,28 +241,19 @@ let Tlist_Use_Right_Window = 1
 let Tlist_WinWidth = 60
 " Generate ctags for all bundled gems as well
 " map <leader>rt :!ctags --extra=+f --languages=-javascript --exclude=.git --exclude=log -R * `rvm gemdir`/gems/* `rvm gemdir`/bundler/gems/*<CR><C-M>
-
 " Use only current file to autocomplete from tags
 " set complete=.,t
 set complete=.,w,b,u,t,i
 
-" Buffer window (find file in open buffers)
-nmap <silent> <leader>b :FufBuffer<CR>
-
+" ---------------------------------------------------------------------------
 " AutoClose
+" ---------------------------------------------------------------------------
 let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"', "'": "'", '#{': '}'}
 let g:AutoCloseProtectedRegions = ["Character"]
 
-let my_home = expand("$HOME/")
-
-if filereadable(my_home . '.vim/bundle/vim-autocorrect/autocorrect.vim')
-  source ~/.vim/bundle/vim-autocorrect/autocorrect.vim
-endif
-
-" BLAAAME
-vmap <Leader>gb :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p<CR>
-
+" ---------------------------------------------------------------------------
 " Tabularize
+" ---------------------------------------------------------------------------
 if exists(":Tab")
   nmap <leader>a\| :Tab /\|<CR>
   vmap <leader>a\| :Tab /\|<CR>
@@ -285,25 +263,21 @@ if exists(":Tab")
   vmap <leader>a: :Tab /:\zs<CR>
 endif
 
-let g:cssColorVimDoNotMessMyUpdatetime = 1
-
 " Easy commenting
 nnoremap // :TComment<CR>
 vnoremap // :TComment<CR>
 
-" Supertab
-let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
-
-" Syntastic
+" ---------------------------------------------------------------------------
+"  Syntastic
+" ---------------------------------------------------------------------------
 " let g:syntastic_auto_loc_list=1
 " let g:syntastic_auto_jump=1
 
-"  ---------------------------------------------------------------------------
+" ---------------------------------------------------------------------------
 "  Ruby/Rails
-"  ---------------------------------------------------------------------------
-
+" ---------------------------------------------------------------------------
 " Execute current buffer as ruby
-map <S-r> :w !ruby<CR>
+map <leader>r :w !ruby<CR>
 
 map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
 map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
@@ -319,32 +293,29 @@ map <leader>gr :topleft :split config/routes.rb<cr>
 map <leader>gg :topleft 100 :split Gemfile<cr>
 
 " Skip to Model, View or Controller
-map <Leader>m :Rmodel
-map <Leader>v :Rview
-map <Leader>c :Rcontroller
+map <leader>m :Rmodel
+map <leader>v :Rview
+map <leader>c :Rcontroller
 
 " Other files to consider Ruby
 au BufRead,BufNewFile Gemfile,Rakefile,Thorfile,config.ru,Vagrantfile,Guardfile,Capfile set ft=ruby
 
-"  ---------------------------------------------------------------------------
+" ---------------------------------------------------------------------------
 "  CoffeeScript
-"  ---------------------------------------------------------------------------
-
+" ---------------------------------------------------------------------------
 let coffee_compile_vert = 1
 au BufNewFile,BufReadPost *.coffee setl foldmethod=indent
 
-"  ---------------------------------------------------------------------------
+" ---------------------------------------------------------------------------
 "  SASS / SCSS
-"  ---------------------------------------------------------------------------
-
+" ---------------------------------------------------------------------------
 au BufNewFile,BufReadPost *.scss setl foldmethod=indent
 au BufNewFile,BufReadPost *.sass setl foldmethod=indent
 au BufRead,BufNewFile *.scss set filetype=scss
 
-"  ---------------------------------------------------------------------------
-"  GUI
-"  ---------------------------------------------------------------------------
-
+" ---------------------------------------------------------------------------
+" GUI
+" ---------------------------------------------------------------------------
 if has("gui_running")
   set guioptions-=T " no toolbar set guioptions-=m " no menus
   set guioptions-=r " no scrollbar on the right
@@ -353,43 +324,43 @@ if has("gui_running")
   set guioptions-=b " no scrollbar on the bottom
   set guioptions=aiA
   set mouse=v
-  set guifont=Source\ Code\ Pro:h12 "<- Maybe a good idea when using mac
+  set guifont=Sauce\ Code\ Powerline\ Semibold:h13 "<- Maybe a good idea when using mac
 endif
-set guifont=Source\ Code\ Pro:h12
+set guifont=Sauce\ Code\ Powerline\ Semibold:h13
 
-"  ---------------------------------------------------------------------------
+" ---------------------------------------------------------------------------
 "  Directories
-"  ---------------------------------------------------------------------------
-
+" ---------------------------------------------------------------------------
 set backupdir=~/tmp,/tmp
 set undodir=~/.vim/.tmp,~/tmp,~/.tmp,/tmp
 
 " Ctags path (brew install ctags)
 let Tlist_Ctags_Cmd = 'ctags'
 
-" Make Vim use RVM correctly when using Zsh
-" https://rvm.beginrescueend.com/integration/vim/
-set shell=/bin/sh
+" ---------------------------------------------------------------------------
+"  vim-airline
+" ---------------------------------------------------------------------------
+" Enable Powerline fonts
+let g:airline_powerline_fonts = 1
+" Change truncation widths
+let g:airline#extensions#default#section_truncate_width
+      \= {'b': 104, 'x': 60, 'y': 104, 'z': 45}
 
-" Finally, load custom configs
-if filereadable(my_home . '.vimrc.local')
-  source ~/.vimrc.local
-endif
+" ---------------------------------------------------------------------------
+"  vim-gitgutter
+" ---------------------------------------------------------------------------
+" Ignore whitespace
+let g:gitgutter_diff_args = '-w'
 
 "  ---------------------------------------------------------------------------
 "  Misc
 "  ---------------------------------------------------------------------------
 
+" Finally, load custom configs
+if filereadable(expand("$HOME") . '.vimrc.local')
+  source ~/.vimrc.local
+endif
+
 " When vimrc, either directly or via symlink, is edited, automatically reload it
 autocmd! bufwritepost .vimrc source %
 autocmd! bufwritepost vimrc source %
-
-" Trailing whitespace stuff
-match ErrorMsg '\s\+$'
-nnoremap <Leader>rtw :%s/\s\+$//e<CR>
-
-" Custom Tabular stuff
-if exists(":Tab")
-  :AddTabularPattern first_colon /^[^:]*\zs:/l1c0l0
-  :AddTabularPattern hash_keys /^[^:]*\zs:/r0c1l0
-endif
