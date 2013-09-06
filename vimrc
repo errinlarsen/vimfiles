@@ -214,13 +214,25 @@ map <leader>p :NERDTreeToggle<cr>
 " ---------------------------------------------------------------------------
 " MiniBufExpl
 " ---------------------------------------------------------------------------
-" let g:miniBufExplBRSplit = 0
-let g:miniBufExplBuffersNeeded = 1
-" Focus into the MBE window
-noremap <leader>b :MBEFocus<cr>
+" Don't open at start
+let g:miniBufExplorerAutoStart = 0
+" Open in a Vertical Split 30 chars wide
+let g:miniBufExplVSplit = 30
+" Open to the top/left - '1' causes bottom/right
+let g:miniBufExplBRSplit = 0
+" Show regardless of # of Buffers
+let g:miniBufExplBuffersNeeded = 0
+" Toggle the MBE windows
+" nnoremap <F4> :MBEToggle<cr>
+" Toggle && Focus into the MBE window
+noremap <expr> <silent> <leader>b !matchstr(expand('%'), 'MiniBufExplorer') ?
+  \ ':exec "MBEToggle" <bar> :exec "MBEFocus"<cr>' :
+  \ ':exec "MBEClose"<cr>'
 " Switch between buffers
-noremap <tab> :MBEbn<cr>
-noremap <S-tab> :MBEbp<cr>
+" noremap <tab> :MBEbn<cr>
+" noremap <S-tab> :MBEbp<cr>
+noremap <tab> :bn<cr>
+noremap <S-tab> :bp<cr>
 " close buffer
 noremap <leader>d :MBEbd<cr>
 " close all buffers
