@@ -3,12 +3,12 @@ set nocompatible               " be iMproved
 " ---------------------------------------------------------------------------
 "  Plugins
 " ---------------------------------------------------------------------------
-
 silent! runtime bundles.vim
 
 " ---------------------------------------------------------------------------
 "  General
 " ---------------------------------------------------------------------------
+let s:home_dir = expand("$HOME/")
 
 filetype plugin indent on
 let mapleader = ","
@@ -24,7 +24,6 @@ set autoread
 " ---------------------------------------------------------------------------
 "  UI
 " ---------------------------------------------------------------------------
-
 set title
 set encoding=utf-8
 set scrolloff=3
@@ -216,14 +215,20 @@ map <leader>p :NERDTreeToggle<cr>
 " ---------------------------------------------------------------------------
 " Don't open at start
 let g:miniBufExplorerAutoStart = 0
-" Open in a Vertical Split 30 chars wide
-let g:miniBufExplVSplit = 30
+" Open in a Vertical Split
+let g:miniBufExplVSplit = 1
+" Set the min width
+let g:miniBufExplMinSize = 50
 " Open to the top/left - '1' causes bottom/right
 let g:miniBufExplBRSplit = 0
 " Show regardless of # of Buffers
 let g:miniBufExplBuffersNeeded = 0
+" Wrap when trying to switch past last buffer
+let g:miniBufExplCycleArround = 1
+" Close after selectiong
+let g:miniBufExplCloseOnSelect = 1
 " Toggle the MBE windows
-" nnoremap <F4> :MBEToggle<cr>
+nnoremap <F4> :MBEToggle<cr>
 " Toggle && Focus into the MBE window
 noremap <expr> <silent> <leader>b !matchstr(expand('%'), 'MiniBufExplorer') ?
   \ ':exec "MBEToggle" <bar> :exec "MBEFocus"<cr>' :
@@ -231,8 +236,8 @@ noremap <expr> <silent> <leader>b !matchstr(expand('%'), 'MiniBufExplorer') ?
 " Switch between buffers
 " noremap <tab> :MBEbn<cr>
 " noremap <S-tab> :MBEbp<cr>
-noremap <tab> :bn<cr>
-noremap <S-tab> :bp<cr>
+noremap <tab> :MBEbn<cr>
+noremap <S-tab> :MBEbp<cr>
 " close buffer
 noremap <leader>d :MBEbd<cr>
 " close all buffers
@@ -369,7 +374,7 @@ let g:gitgutter_diff_args = '-w'
 "  ---------------------------------------------------------------------------
 
 " Finally, load custom configs
-if filereadable(expand("$HOME") . '.vimrc.local')
+if filereadable(s:home_dir . '.vimrc.local')
   source ~/.vimrc.local
 endif
 
