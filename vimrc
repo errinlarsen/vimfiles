@@ -54,15 +54,6 @@ set undofile
 " set winminheight=5
 " set winheight=999
 
-" ---------------------------------------------------------------------------
-"  Color scheme
-" ---------------------------------------------------------------------------
-set t_Co=256
-set background=dark " light is default
-let base16colorspace=256
-colorscheme base16-railscasts
-" colorscheme railscasts-term
-
 set splitbelow splitright
 
 set tabstop=2
@@ -74,36 +65,45 @@ set nowrap
 set textwidth=79
 set formatoptions=n
 
+" ---------------------------------------------------------------------------
+"  Color scheme
+" ---------------------------------------------------------------------------
+set t_Co=256
+set background=dark " light is default
+let base16colorspace=256
+colorscheme base16-railscasts
+
+" Cursor row/column colors:
+hi CursorLine ctermbg=235
+hi CursorColumn ctermbg=235
+
 " check to make sure vim has been compiled with colorcolumn support
 " before enabling it
 if exists("+colorcolumn")
-  set colorcolumn=80
+  set colorcolumn=81
 endif
 
 " ---------------------------------------------------------------------------
 "  Mappings
 " ---------------------------------------------------------------------------
 " Searching / moving
-nnoremap / /\v
-vnoremap / /\v
+" nnoremap / /\v
+" vnoremap / /\v
 set ignorecase
 set smartcase
 set incsearch
 set showmatch
 set hlsearch
-" turn search highlight off
+" turn current search highlight off
 nnoremap <leader><space> :noh<cr>
 " search (forwards)
-nmap <space> /
+" nmap <space> /
 " search (backwards)
-map <c-space> ?
+" map <c-space> ?
 
 " Center screen when scrolling search results
 nmap n nzz
 nmap N Nzz
-
-imap <C-h> <ESC>^
-imap <C-l> <ESC>$
 
 " Turn off arrow keys (this might not be a good idea for beginners, but it is
 " the best way to ween yourself of arrow keys on to hjkl)
@@ -112,7 +112,7 @@ imap <C-l> <ESC>$
 nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>"
+nnoremap <Down> :echoe "Use j"<CR>
 inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
@@ -125,26 +125,33 @@ nnoremap k gk
 " Map ESC
 imap jj <ESC>
 
+
 " ACK
 " set grepprg=ack
 " ,a to Ack (search in files)
-nnoremap <leader>a :Ack
-
+" nnoremap <leader>a :Ack
 " Ack settings: https://github.com/krisleech/vimfiles/wiki/Make-ack-ignore-files
+
 
 " Auto format
 map === mmgg=G`m^zz
 
+" Splits & Tabs
 " Move between splits
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+" Create new tab
+noremap <leader>t :tabnew<cr>
+noremap <leader>T :tabedit %%
+" Move between tabs
+nnoremap t gt
+nnoremap T gT
 
 " Move lines up and down
 " map <C-J> :m +1 <CR>
 " map <C-K> :m -2 <CR>
-
 
 " Switch between last two buffers
 nnoremap <leader><leader> <c-^>
@@ -175,7 +182,7 @@ set suffixes+=.old
 " inoremap <silent> <F3> <ESC>:YRShow<cr>
 
 " Press F5 to toggle GUndo tree
-nnoremap <F5> :GundoToggle<CR>
+" nnoremap <F5> :GundoToggle<CR>
 
 " indent file and return cursor and center cursor
 map   <silent> <F6> mmgg=G'mzz
@@ -185,16 +192,6 @@ imap  <silent> <F6> <Esc> mmgg=G'mzz
 "  ===========================================================================
 "  Plugins
 "  ===========================================================================
-
-" ---------------------------------------------------------------------------
-" Command-T
-" ---------------------------------------------------------------------------
-" find file
-map <leader>f :CommandTFlush<cr>\|:CommandT<cr>
-" find file in current directory
-map <leader>gf :CommandTFlush<cr>\|:CommandT %%<cr>
-
-let g:CommandTMaxHeight = 20
 
 " ---------------------------------------------------------------------------
 " NERDTree
@@ -208,44 +205,62 @@ let NERDTreeWinSize = 50
 let NERDTreeChDirMode = 2
 let NERDTreeDirArrows = 1
 " open file browser
-map <leader>p :NERDTreeToggle<cr>
+noremap <leader>p :NERDTreeToggle<cr>
+" [˜ == <A-n>] find current file in file browser
+noremap <C-p> :NERDTreeFind<cr>
+
+" ---------------------------------------------------------------------------
+" BufExplorer
+" ---------------------------------------------------------------------------
+let g:bufExplorerShowRelativePath = 1  " Show relative paths
+let g:bufExplorerSplitRight = 0        " Split left
+" " Switch between buffers
+noremap <tab> :bn<cr>
+noremap <S-tab> :bp<cr>
+" close buffer
+noremap <leader>bd :bd<cr>
+" " close all buffers
+" " nmap <leader>da :bufdo bd<CR>
+" unload buffer
+noremap <leader>bu :bun<cr>
+" wipeout buffer
+noremap <leader>bw :bw<cr>
 
 " ---------------------------------------------------------------------------
 " MiniBufExpl
 " ---------------------------------------------------------------------------
-" Don't open at start
-let g:miniBufExplorerAutoStart = 0
-" Open in a Vertical Split
-let g:miniBufExplVSplit = 1
-" Set the min width
-let g:miniBufExplMinSize = 50
-" Open to the top/left - '1' causes bottom/right
-let g:miniBufExplBRSplit = 0
-" Show regardless of # of Buffers
-let g:miniBufExplBuffersNeeded = 0
-" Wrap when trying to switch past last buffer
-let g:miniBufExplCycleArround = 1
-" Close after selectiong
-let g:miniBufExplCloseOnSelect = 1
-" Toggle the MBE windows
-nnoremap <F4> :MBEToggle<cr>
-" Toggle && Focus into the MBE window
-noremap <expr> <silent> <leader>b !matchstr(expand('%'), 'MiniBufExplorer') ?
-  \ ':exec "MBEToggle" <bar> :exec "MBEFocus"<cr>' :
-  \ ':exec "MBEClose"<cr>'
-" Switch between buffers
+" let g:miniBufExplorerAutoStart = 0  " Don't open at start
+" let g:miniBufExplVSplit = 1         " Open in a Vertical Split
+" let g:miniBufExplMinSize = 50       " Open to the top/left
+" let g:miniBufExplBRSplit = 0        " Set the min width
+" let g:miniBufExplBuffersNeeded = 0  " Show regardless of # of Buffers
+" let g:miniBufExplCycleArround = 1   " Wrap when switching past last buffer
+" let g:miniBufExplCloseOnSelect = 1  " Close after selectiong
+"
+" " Toggle the MBE windows
+" nnoremap <F4> :MBEToggle<cr>
+" " Toggle && Focus into the MBE window
+" nnoremap <silent> <leader>b :call MBEOpenAndFocus()<cr>
+" function! MBEOpenAndFocus()
+"   :MBEToggle
+"   if !matchstr(expand("%"), "MiniBufExplorer")
+"     :MBEFocus
+"   endif
+"   set equalalways&
+" endfunction
+" " Switch between buffers
+" " noremap <tab> :MBEbn<cr>
+" " noremap <S-tab> :MBEbp<cr>
 " noremap <tab> :MBEbn<cr>
 " noremap <S-tab> :MBEbp<cr>
-noremap <tab> :MBEbn<cr>
-noremap <S-tab> :MBEbp<cr>
-" close buffer
-noremap <leader>d :MBEbd<cr>
-" close all buffers
-" nmap <leader>da :bufdo bd<CR>
-" unload buffer
-noremap <leader>u :MBEbun<cr>
-" wipeout buffer
-noremap <leader>D :MBEbw<cr>
+" " close buffer
+" noremap <leader>d :MBEbd<cr>
+" " close all buffers
+" " nmap <leader>da :bufdo bd<CR>
+" " unload buffer
+" noremap <leader>u :MBEbun<cr>
+" " wipeout buffer
+" noremap <leader>D :MBEbw<cr>
 
 " ---------------------------------------------------------------------------
 " TagList
@@ -280,6 +295,9 @@ if exists(":Tab")
   vmap <leader>a: :Tab /:\zs<CR>
 endif
 
+" ---------------------------------------------------------------------------
+"  TComment
+" ---------------------------------------------------------------------------
 " Easy commenting
 nnoremap // :TComment<CR>
 vnoremap // :TComment<CR>
@@ -294,16 +312,7 @@ vnoremap // :TComment<CR>
 "  Ruby/Rails
 " ---------------------------------------------------------------------------
 " Execute current buffer as ruby
-map <leader>r :w !ruby<CR>
-
-map <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
-map <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
-map <leader>gm :CommandTFlush<cr>\|:CommandT app/models<cr>
-map <leader>gh :CommandTFlush<cr>\|:CommandT app/helpers<cr>
-map <leader>gl :CommandTFlush<cr>\|:CommandT lib<cr>
-map <leader>gp :CommandTFlush<cr>\|:CommandT public<cr>
-map <leader>gs :CommandTFlush<cr>\|:CommandT public/stylesheets<cr>
-map <leader>ga :CommandTFlush<cr>\|:CommandT app/assets<cr>
+map <leader>R :w !ruby<CR>
 
 " View routes or Gemfile in large split
 map <leader>gr :topleft :split config/routes.rb<cr>
@@ -316,6 +325,10 @@ map <leader>c :Rcontroller
 
 " Other files to consider Ruby
 au BufRead,BufNewFile Gemfile,Rakefile,Thorfile,config.ru,Vagrantfile,Guardfile,Capfile set ft=ruby
+
+" ---------------------------------------------------------------------------
+"  vim-vroom
+" ---------------------------------------------------------------------------
 
 " ---------------------------------------------------------------------------
 "  CoffeeScript
@@ -343,7 +356,6 @@ if has("gui_running")
   set mouse=v
   set guifont=Sauce\ Code\ Powerline\ Semibold:h13 "<- Maybe a good idea when using mac
 endif
-set guifont=Sauce\ Code\ Powerline\ Semibold:h13
 
 " ---------------------------------------------------------------------------
 "  Directories
@@ -364,10 +376,16 @@ let g:airline#extensions#default#section_truncate_width
       \= {'b': 104, 'x': 60, 'y': 104, 'z': 45}
 
 " ---------------------------------------------------------------------------
-"  vim-gitgutter
+"  GitGutter
 " ---------------------------------------------------------------------------
-" Ignore whitespace
-let g:gitgutter_diff_args = '-w'
+let g:gitgutter_enabled = 0       " Turned off by default
+let g:gitgutter_diff_args = '-w'  " Ignore whitespace
+noremap <C-g><C-g> :GitGutterToggle<cr> <bar> :GitGutterLineHighlightsToggle<cr>
+
+" Highlight line colors:
+hi GitGutterAddLine        ctermfg=NONE ctermbg=238
+hi GitGutterDiffChangeLine ctermfg=NONE ctermbg=238
+hi GitGutterDiffDeleteLine ctermfg=NONE ctermbg=238
 
 "  ---------------------------------------------------------------------------
 "  Misc

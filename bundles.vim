@@ -20,11 +20,11 @@ Bundle "tomtom/tlib_vim"
 " UI enhancements
 Bundle "chriskempson/base16-vim"
 Bundle "bling/vim-airline"
-Bundle "fholgado/minibufexpl.vim"
+" Bundle "guns/xterm-color-table.vim"  " Can be helpful when picking colors
 
 " Specific utilities
 Bundle "scrooloose/nerdtree"
-Bundle "git://git.wincent.com/command-t.git"
+Bundle "bufexplorer.zip"
 Bundle "sjl/gundo.vim"
 Bundle "godlygeek/tabular"
 Bundle "tpope/vim-fugitive"
@@ -43,6 +43,7 @@ Bundle "textobj-rubyblock"
 Bundle "tpope/vim-rake"
 Bundle "tpope/vim-endwise"
 Bundle "tpope/vim-rails"
+Bundle "skalnik/vim-vroom"
 Bundle "tpope/vim-markdown"
 Bundle "tpope/vim-haml"
 Bundle "tpope/vim-bundler"
@@ -58,13 +59,14 @@ Bundle "mattn/gist-vim"
 
 " Below are plugins I'm not sure I use/want/need
 " Bundle "ack.vim"
-" Bundle "YankRing.vim" 
+" Bundle "fholgado/minibufexpl.vim"
 " Bundle "SuperTab"
 " Bundle "panozzaj/vim-autocorrect"
-" Bundle "honza/vim-snippets"
-" Bundle "garbas/vim-snipmate"
 " Bundle "sophacles/vim-bundle-sparkup"
 " Bundle "greyblake/vim-preview"
+" Bundle "garbas/vim-snipmate"
+" Bundle "honza/vim-snippets"
+" Bundle "YankRing.vim"
 
 filetype plugin indent on     " and turn it back on!
 
