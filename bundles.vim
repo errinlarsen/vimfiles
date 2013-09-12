@@ -36,8 +36,10 @@ Bundle "scrooloose/syntastic"
 Bundle "Townk/vim-autoclose"
 Bundle "tpope/vim-surround"
 Bundle "tomtom/tcomment_vim.git"
+Bundle "zweifisch/pipe2eval"
 
 " Specific Programming/Markup language helpers
+Bundle "vim-ruby/vim-ruby"
 Bundle "tpope/vim-rbenv"
 Bundle "textobj-rubyblock"
 Bundle "tpope/vim-rake"
