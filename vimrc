@@ -20,16 +20,18 @@ set nowritebackup
 set noswapfile      " don't use a swapfile
 set autoread        " read a file if it changes outside of Vim
 
+set clipboard=unnamed
+
 " ---------------------------------------------------------------------------
 "  Whitespace
 " ---------------------------------------------------------------------------
 set nowrap                      " don't wrap lines
-set tabstop=2 shiftwidth=2  " a tab is two spaces
-set softtabstop=2             " do I need this?
+set tabstop=2 shiftwidth=2      " a tab is two spaces
+set softtabstop=2               " do I need this?
 set expandtab                   " use spaces, not <tab>s
 set backspace=indent,eol,start  " backspace through everything in Insert mode
 set autoindent                  " copy indent from curr line when starting next
-set smartindent                 " start indents intelligently based on syntax
+" set smartindent                 " start indents intelligently based on syntax
 
 " ---------------------------------------------------------------------------
 "  Searching
@@ -77,7 +79,6 @@ set undofile
 
 set splitbelow splitright
 
-
 set textwidth=79
 set formatoptions=n
 
@@ -110,9 +111,9 @@ set wildignore=.svn,CVS,.git,*.swp,*.jpg,*.png,*.gif,*.pdf,*.bak
 set suffixes+=.old
 
 
-"  ===========================================================================
+" ===========================================================================
 "  Plugins
-"  ===========================================================================
+" ===========================================================================
 
 " ---------------------------------------------------------------------------
 " NERDTree
@@ -125,6 +126,9 @@ let NERDTreeQuitOnOpen = 1
 let NERDTreeWinSize = 50
 let NERDTreeChDirMode = 2
 let NERDTreeDirArrows = 1
+
+" Open NERDTree if Vim was started with no files listed on the cmd line
+autocmd vimenter * if !argc() | NERDTree | endif
 
 " ---------------------------------------------------------------------------
 " BufExplorer
@@ -211,11 +215,11 @@ let Tlist_Ctags_Cmd = 'ctags'
 " ---------------------------------------------------------------------------
 "  vim-airline
 " ---------------------------------------------------------------------------
-" Enable Powerline fonts
-let g:airline_powerline_fonts = 1
-" Change truncation widths
-let g:airline#extensions#default#section_truncate_width
-      \= {'b': 104, 'x': 60, 'y': 104, 'z': 45}
+" " Enable Powerline fonts
+" let g:airline_powerline_fonts = 1
+" " Change truncation widths
+" let g:airline#extensions#default#section_truncate_width
+"       \= {'b': 104, 'x': 60, 'y': 104, 'z': 45}
 
 " ---------------------------------------------------------------------------
 "  GitGutter
@@ -228,9 +232,23 @@ hi GitGutterAddLine    ctermfg=NONE ctermbg=238
 hi GitGutterChangeLine ctermfg=NONE ctermbg=238
 hi GitGutterDeleteLine ctermfg=NONE ctermbg=238
 
-"  ---------------------------------------------------------------------------
+" ---------------------------------------------------------------------------
+"  Gist
+" ---------------------------------------------------------------------------
+let g:gist_post_private = 1                  " private gists by default
+let g:gist_open_browser_after_post = 1       " open browser after posting
+let g:gist_browser_command = 'open %URL% &'  " use `open` for Gist URLs
+let g:gist_get_multiplefile = 1              " open all files if more than one
+
+
+" ---------------------------------------------------------------------------
+"  Pipe2Eval
+" ---------------------------------------------------------------------------
+let g:pipe2eval_map_key = '!'
+
+" ---------------------------------------------------------------------------
 "  Misc
-"  ---------------------------------------------------------------------------
+" ---------------------------------------------------------------------------
 
 " Finally, load custom configs
 if filereadable(s:home_dir . '.vimrc.local')
@@ -240,5 +258,3 @@ endif
 " When vimrc, either directly or via symlink, is edited, automatically reload it
 autocmd! bufwritepost .vimrc source %
 autocmd! bufwritepost vimrc source %
-
-let g:pipe2eval_map_key = '!'

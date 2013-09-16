@@ -19,8 +19,7 @@ Bundle "tomtom/tlib_vim"
 
 " UI enhancements
 Bundle "chriskempson/base16-vim"
-Bundle "bling/vim-airline"
-" Bundle "guns/xterm-color-table.vim"  " Can be helpful when picking colors
+Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 " Specific utilities
 Bundle "scrooloose/nerdtree"
@@ -56,10 +55,12 @@ Bundle "vim-coffee-script"
 Bundle "cakebaker/scss-syntax.vim"
 
 " API wrappers
-Bundle "mattn/wabapi-vim"  "gist-vim requirement
+"  gist-vim requirement:
+Bundle "mattn/webapi-vim"
 Bundle "mattn/gist-vim"
 
 " Below are plugins I'm not sure I use/want/need
+" Bundle "bling/vim-airline"
 " Bundle "ack.vim"
 " Bundle "fholgado/minibufexpl.vim"
 " Bundle "SuperTab"
@@ -69,7 +70,8 @@ Bundle "mattn/gist-vim"
 " Bundle "garbas/vim-snipmate"
 " Bundle "honza/vim-snippets"
 " Bundle "YankRing.vim"
+" Bundle "guns/xterm-color-table.vim"  " Can be helpful when picking colors
 
-filetype plugin indent on     " and turn it back on!
+filetype plugin indent on  " and turn it back on!
 
 runtime macros/matchit.vim

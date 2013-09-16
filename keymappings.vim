@@ -89,14 +89,14 @@ map       <silent> <F6>     mmgg=G'mzz
 imap      <silent> <F6>     <Esc> mmgg=G'mzz
 " Auto format
 map       ===               mmgg=G`m^zz
-" Tabularize
+" Tabularize - not working right now
 if exists(":Tab")
-nmap      <Leader>a\|       :Tab /\|<CR>
-vmap      <Leader>a\|       :Tab /\|<CR>
-nmap      <Leader>a=        :Tab /=<CR>
-vmap      <Leader>a=        :Tab /=<CR>
-nmap      <Leader>a:        :Tab /:\zs<CR>
-vmap      <Leader>a:        :Tab /:\zs<CR>
+  nmap      <Leader>a\|       :Tab /\|<CR>
+  vmap      <Leader>a\|       :Tab /\|<CR>
+  nmap      <Leader>a=        :Tab /=<CR>
+  vmap      <Leader>a=        :Tab /=<CR>
+  nmap      <Leader>a:        :Tab /:\zs<CR>
+  vmap      <Leader>a:        :Tab /:\zs<CR>
 endif
 " Easy commenting - TComment
 nnoremap  //                :TComment<CR>
