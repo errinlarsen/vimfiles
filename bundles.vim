@@ -16,6 +16,8 @@ Bundle "L9"
 Bundle "textobj-user"
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
+Bundle "rizzatti/funcoo.vim"
+Bundle "shinokada/dragvisuals.vim"
 
 " UI enhancements
 Bundle "chriskempson/base16-vim"
@@ -24,10 +26,11 @@ Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 " Specific utilities
 Bundle "scrooloose/nerdtree"
 Bundle "bufexplorer.zip"
+Bundle "rizzatti/dash.vim"
 Bundle "sjl/gundo.vim"
-Bundle "godlygeek/tabular"
+Bundle "junegunn/vim-easy-align"
 Bundle "tpope/vim-fugitive"
-Bundle "airblade/vim-gitgutter"
+Bundle "terryma/vim-multiple-cursors"
 
 " General Programming/Markup language helpers
 Bundle "taglist.vim"
@@ -35,7 +38,6 @@ Bundle "scrooloose/syntastic"
 Bundle "Townk/vim-autoclose"
 Bundle "tpope/vim-surround"
 Bundle "tomtom/tcomment_vim.git"
-Bundle "zweifisch/pipe2eval"
 
 " Specific Programming/Markup language helpers
 Bundle "vim-ruby/vim-ruby"
@@ -48,11 +50,6 @@ Bundle "skalnik/vim-vroom"
 Bundle "tpope/vim-markdown"
 Bundle "tpope/vim-haml"
 Bundle "tpope/vim-bundler"
-Bundle "elixir-lang/vim-elixir"
-Bundle "pangloss/vim-javascript"
-Bundle "jQuery"
-Bundle "vim-coffee-script"
-Bundle "cakebaker/scss-syntax.vim"
 
 " API wrappers
 "  gist-vim requirement:
@@ -60,9 +57,9 @@ Bundle "mattn/webapi-vim"
 Bundle "mattn/gist-vim"
 
 " Below are plugins I'm not sure I use/want/need
+" Bundle "airblade/vim-gitgutter"
 " Bundle "bling/vim-airline"
 " Bundle "ack.vim"
-" Bundle "fholgado/minibufexpl.vim"
 " Bundle "SuperTab"
 " Bundle "panozzaj/vim-autocorrect"
 " Bundle "sophacles/vim-bundle-sparkup"

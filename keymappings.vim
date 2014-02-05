@@ -38,6 +38,12 @@ nnoremap  <Bar>             gT
 " Center screen when scrolling search results
 nmap      n                 nzz
 nmap      N                 Nzz
+" dragvisuals.vim
+vmap <expr> <LEFT>  DVB_Drag('left')
+vmap <expr> <UP>    DVB_Drag('up')
+vmap <expr> <RIGHT> DVB_Drag('right')
+vmap <expr> <DOWN>  DVB_Drag('down')
+vmap <expr> D       DVB_Duplicate()
 
 " ---------------------------------------------------------------------------
 "  Splits/Tabs
@@ -63,10 +69,10 @@ map       <Esc>T            :tabedit %%
 "  Files
 " ---------------------------------------------------------------------------
 " Edit/View files relative to current directory
-map       <Leader>e         :edit %%
+" map       <Leader>e         :edit %%
 map       <Leader>v         :view %%
 " open file browser
-noremap   <Leader>p         :NERDTreeToggle<cr>
+noremap   <Leader>e         :NERDTreeToggle<cr>
 " find current file in file browser
 noremap   <C-p>             :NERDTreeFind<cr>
 " View routes or Gemfile in large split
@@ -89,15 +95,23 @@ map       <silent> <F6>     mmgg=G'mzz
 imap      <silent> <F6>     <Esc> mmgg=G'mzz
 " Auto format
 map       ===               mmgg=G`m^zz
+
+" vim-easy-align:
+" - Start interactive EasyAlign in visual mode
+vmap <Enter> <Plug>(EasyAlign)
+" - Start interactive EasyAlign with a Vim movement
+nmap <Leader>a <Plug>(EasyAlign)
+
 " Tabularize - not working right now
-if exists(":Tab")
-  nmap      <Leader>a\|       :Tab /\|<CR>
-  vmap      <Leader>a\|       :Tab /\|<CR>
-  nmap      <Leader>a=        :Tab /=<CR>
-  vmap      <Leader>a=        :Tab /=<CR>
-  nmap      <Leader>a:        :Tab /:\zs<CR>
-  vmap      <Leader>a:        :Tab /:\zs<CR>
-endif
+" if exists(":Tab")
+"   nmap      <Leader>a\|       :Tab /\|<CR>
+"   vmap      <Leader>a\|       :Tab /\|<CR>
+"   nmap      <Leader>a=        :Tab /=<CR>
+"   vmap      <Leader>a=        :Tab /=<CR>
+"   nmap      <Leader>a:        :Tab /:\zs<CR>
+"   vmap      <Leader>a:        :Tab /:\zs<CR>
+" endif
+
 " Easy commenting - TComment
 nnoremap  //                :TComment<CR>
 vnoremap  //                :TComment<CR>
@@ -158,31 +172,3 @@ noremap   <C-g><C-g>        :GitGutterToggle<CR> <Bar> :GitGutterLineHighlightsT
 " set grepprg=ack
 " " ,a to Ack (search in files)
 " nnoremap <Leader>a :Ack
-
-" ---------------------------------------------------------------------------
-" MiniBufExpl
-" ---------------------------------------------------------------------------
-" " Toggle the MBE windows
-" nnoremap <F4> :MBEToggle<cr>
-" " Toggle && Focus into the MBE window
-" nnoremap <silent> <Leader>b :call MBEOpenAndFocus()<cr>
-" function! MBEOpenAndFocus()
-"   :MBEToggle
-"   if !matchstr(expand("%"), "MiniBufExplorer")
-"     :MBEFocus
-"   endif
-"   set equalalways&
-" endfunction
-" " Switch between buffers
-" " noremap <tab> :MBEbn<cr>
-" " noremap <S-tab> :MBEbp<cr>
-" noremap <tab> :MBEbn<cr>
-" noremap <S-tab> :MBEbp<cr>
-" " close buffer
-" noremap <Leader>d :MBEbd<cr>
-" " close all buffers
-" " nmap <Leader>da :bufdo bd<CR>
-" " unload buffer
-" noremap <Leader>u :MBEbun<cr>
-" " wipeout buffer
-" noremap <Leader>D :MBEbw<cr>

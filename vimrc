@@ -10,36 +10,28 @@ silent! runtime bundles.vim
 " ---------------------------------------------------------------------------
 syntax enable
 set encoding=utf-8
-set showcmd               " display incomplete commands
-filetype plugin indent on " load file typ plugins + indentation
+set showcmd                    " display incomplete commands
+filetype plugin indent on      " load file typ plugins + indentation
 
-set modelines=0   " don't check top and bottom limes for settings
-set history=1000  " Set how many cmd/search/input/etc. lines are saved
-set nobackup        " don't save a backup when writing
+set modelines=0                " don't check top and bottom limes for settings
+set history=1000               " Set how many cmd/search/input/etc. lines are saved
+set nobackup                   " don't save a backup when writing
 set nowritebackup
-set noswapfile      " don't use a swapfile
-set autoread        " read a file if it changes outside of Vim
+set noswapfile                 " don't use a swapfile
+set autoread                   " read a file if it changes outside of Vim
 
 set clipboard=unnamed
 
 " ---------------------------------------------------------------------------
-"  Whitespace
+" Whitespace
 " ---------------------------------------------------------------------------
-set nowrap                      " don't wrap lines
-set tabstop=2 shiftwidth=2      " a tab is two spaces
-set softtabstop=2               " do I need this?
-set expandtab                   " use spaces, not <tab>s
-set backspace=indent,eol,start  " backspace through everything in Insert mode
-set autoindent                  " copy indent from curr line when starting next
-" set smartindent                 " start indents intelligently based on syntax
-
-" ---------------------------------------------------------------------------
-"  Searching
-" ---------------------------------------------------------------------------
-set hlsearch    " highlight matches
-set incsearch   " incremental searching
-set ignorecase  " searches are case insensitive ...
-set smartcase   " ... unless they contain at least one capital letter
+set nowrap                     " don't wrap lines
+set tabstop=2 shiftwidth=2     " a tab is two spaces
+set softtabstop=2              " do I need this?
+set expandtab                  " use spaces, not <tab>s
+set backspace=indent,eol,start " backspace through everything in Insert mode
+set autoindent                 " copy indent from curr line when starting next
+" set smartindent                " start indents intelligently based on syntax
 
 " ---------------------------------------------------------------------------
 "  Key mappings
@@ -55,7 +47,7 @@ endif
 "  UI
 " ---------------------------------------------------------------------------
 set title                     " Set title of the window
-set scrolloff=3             " Keep 3 lines at top/bottom when scrolling
+set scrolloff=3               " Keep 3 lines at top/bottom when scrolling
 set showmode                  " indicate current mode
 set hidden                    " keep buffers loaded but hidden when abondoned
 set wildmenu                  " expanded completion on cmdline
@@ -101,6 +93,31 @@ if exists("+colorcolumn")
 endif
 
 " ---------------------------------------------------------------------------
+" Searching
+" ---------------------------------------------------------------------------
+set hlsearch                   " highlight matches
+set incsearch                  " incremental searching
+set ignorecase                 " searches are case insensitive ...
+set smartcase                  " ... unless they contain >= 1 capital letter
+
+"=====[ Highlight matches when jumping to next ]=============
+" This rewires n and N to do the highlighing...
+nnoremap <silent> n   n:call HLNext(0.3)<cr>
+nnoremap <silent> N   N:call HLNext(0.3)<cr>
+
+" ... which just highlights the match in red
+function! HLNext (blinktime)
+  let [bufnum, lnum, col, off] = getpos('.')
+  let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+  let target_pat = '\c\%#'.@/
+  let ring = matchadd('Error', target_pat, 101)
+  redraw
+  exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+  call matchdelete(ring)
+  redraw
+endfunction
+
+" ---------------------------------------------------------------------------
 "  Mappings
 " ---------------------------------------------------------------------------
 set showmatch
@@ -135,17 +152,6 @@ autocmd vimenter * if !argc() | NERDTree | endif
 " ---------------------------------------------------------------------------
 let g:bufExplorerShowRelativePath = 1  " Show relative paths
 let g:bufExplorerSplitRight = 0        " Split left
-
-" ---------------------------------------------------------------------------
-" MiniBufExpl
-" ---------------------------------------------------------------------------
-" let g:miniBufExplorerAutoStart = 0  " Don't open at start
-" let g:miniBufExplVSplit = 1         " Open in a Vertical Split
-" let g:miniBufExplMinSize = 50       " Open to the top/left
-" let g:miniBufExplBRSplit = 0        " Set the min width
-" let g:miniBufExplBuffersNeeded = 0  " Show regardless of # of Buffers
-" let g:miniBufExplCycleArround = 1   " Wrap when switching past last buffer
-" let g:miniBufExplCloseOnSelect = 1  " Close after selectiong
 
 " ---------------------------------------------------------------------------
 " TagList
@@ -245,6 +251,32 @@ let g:gist_get_multiplefile = 1              " open all files if more than one
 "  Pipe2Eval
 " ---------------------------------------------------------------------------
 let g:pipe2eval_map_key = '!'
+
+
+" ---------------------------------------------------------------------------
+"  MultipleCursor
+" ---------------------------------------------------------------------------
+" let g:multi_cursor_start_key = '<C-n>      # - Default
+let g:multi_cursor_start_key = '<C-m>'
+
+" let g:multi_cursor_use_default_mapping = 0 " Toggle Default mappings
+" let g:multi_cursor_next_key='<C-n>'        # - Default
+" let g:multi_cursor_prev_key='<C-p>'        # - Default
+" let g:multi_cursor_skip_key='<C-x>'        # - Default
+" let g:multi_cursor_quit_key='<Esc>'        # - Default
+
+
+" ---------------------------------------------------------------------------
+"  MultipleCursor
+" ---------------------------------------------------------------------------
+" let g:multi_cursor_start_key = '<C-n>      # - Default
+let g:multi_cursor_start_key = '<C-m>'
+
+" let g:multi_cursor_use_default_mapping = 0 " Toggle Default mappings
+" let g:multi_cursor_next_key='<C-n>'        # - Default
+" let g:multi_cursor_prev_key='<C-p>'        # - Default
+" let g:multi_cursor_skip_key='<C-x>'        # - Default
+" let g:multi_cursor_quit_key='<Esc>'        # - Default
 
 " ---------------------------------------------------------------------------
 "  Misc
