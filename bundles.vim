@@ -1,4 +1,5 @@
 set nocompatible               " be iMproved
+bama_a.png
 
 if !isdirectory(expand("~/.vim/bundle/vundle/.git"))
   !git clone git://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
@@ -17,20 +18,20 @@ Bundle "textobj-user"
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "rizzatti/funcoo.vim"
-Bundle "shinokada/dragvisuals.vim"
 
 " UI enhancements
+Bundle "Lokaltog/powerline", {"rtp": "powerline/bindings/vim/"}
 Bundle "chriskempson/base16-vim"
-Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 " Specific utilities
-Bundle "scrooloose/nerdtree"
+Bundle "kien/ctrlp.vim"
 Bundle "bufexplorer.zip"
+Bundle "ack.vim"
+Bundle "rking/ag.vim"
 Bundle "rizzatti/dash.vim"
 Bundle "sjl/gundo.vim"
-Bundle "junegunn/vim-easy-align"
 Bundle "tpope/vim-fugitive"
-Bundle "terryma/vim-multiple-cursors"
+Bundle "junegunn/vim-easy-align"
 
 " General Programming/Markup language helpers
 Bundle "taglist.vim"
@@ -49,6 +50,7 @@ Bundle "tpope/vim-rails"
 Bundle "skalnik/vim-vroom"
 Bundle "tpope/vim-markdown"
 Bundle "tpope/vim-haml"
+Bundle "slim-template/vim-slim"
 Bundle "tpope/vim-bundler"
 
 " API wrappers
@@ -57,9 +59,10 @@ Bundle "mattn/webapi-vim"
 Bundle "mattn/gist-vim"
 
 " Below are plugins I'm not sure I use/want/need
+" Bundle "scrooloose/nerdtree"
+" Bundle "terryma/vim-multiple-cursors"
 " Bundle "airblade/vim-gitgutter"
 " Bundle "bling/vim-airline"
-" Bundle "ack.vim"
 " Bundle "SuperTab"
 " Bundle "panozzaj/vim-autocorrect"
 " Bundle "sophacles/vim-bundle-sparkup"

@@ -38,12 +38,6 @@ nnoremap  <Bar>             gT
 " Center screen when scrolling search results
 nmap      n                 nzz
 nmap      N                 Nzz
-" dragvisuals.vim
-vmap <expr> <LEFT>  DVB_Drag('left')
-vmap <expr> <UP>    DVB_Drag('up')
-vmap <expr> <RIGHT> DVB_Drag('right')
-vmap <expr> <DOWN>  DVB_Drag('down')
-vmap <expr> D       DVB_Duplicate()
 
 " ---------------------------------------------------------------------------
 "  Splits/Tabs
@@ -71,10 +65,10 @@ map       <Esc>T            :tabedit %%
 " Edit/View files relative to current directory
 " map       <Leader>e         :edit %%
 map       <Leader>v         :view %%
-" open file browser
-noremap   <Leader>e         :NERDTreeToggle<cr>
-" find current file in file browser
-noremap   <C-p>             :NERDTreeFind<cr>
+" " open file browser
+" noremap   <Leader>e         :NERDTreeToggle<cr>
+" " find current file in file browser
+" noremap   <C-p>             :NERDTreeFind<cr>
 " View routes or Gemfile in large split
 map       <Leader>gr        :topleft :split config/routes.rb<cr>
 map       <Leader>gg        :topleft 100 :split Gemfile<cr>
