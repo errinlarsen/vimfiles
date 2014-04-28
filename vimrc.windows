@@ -39,8 +39,8 @@ set autoindent                 " copy indent from curr line when starting next
 let s:home_dir = expand("$HOME/")
 
 " Load key-mappings
-if filereadable(s:home_dir . "Program\ Files/Vim/vimfiles/keymappings.vim")
-  source ~/Program\ Files/Vim/vimfiles/keymappings.vim
+if filereadable(s:home_dir . ".vim/keymappings.vim")
+  source ~/.vim/keymappings.vim
 endif
 
 " ---------------------------------------------------------------------------
@@ -132,20 +132,30 @@ set suffixes+=.old
 "  Plugins
 " ===========================================================================
 
+
+" ---------------------------------------------------------------------------
+" CtrlP
+" ---------------------------------------------------------------------------
+" let g:ctrlp_open_new_file = 'v'  " Default: open new file in a vertical split
+let g:ctrlp_open_new_file = 'r'  " open new file in the current window
+
+" let g:ctrlp_open_multiple_files = 'v'  " Default: open each in a vert. split
+let g:ctrlp_open_multiple_files = '1vr'
+
 " ---------------------------------------------------------------------------
 " NERDTree
 " ---------------------------------------------------------------------------
-let NERDTreeShowBookmarks = 0
-let NERDChristmasTree = 1
-let NERDTreeWinPos = "left"
-let NERDTreeHijackNetrw = 1
-let NERDTreeQuitOnOpen = 1
-let NERDTreeWinSize = 50
-let NERDTreeChDirMode = 2
-let NERDTreeDirArrows = 1
-
-" Open NERDTree if Vim was started with no files listed on the cmd line
-autocmd vimenter * if !argc() | NERDTree | endif
+" let NERDTreeShowBookmarks = 0
+" let NERDChristmasTree = 1
+" let NERDTreeWinPos = "left"
+" let NERDTreeHijackNetrw = 1
+" let NERDTreeQuitOnOpen = 1
+" let NERDTreeWinSize = 50
+" let NERDTreeChDirMode = 2
+" let NERDTreeDirArrows = 1
+"
+" " Open NERDTree if Vim was started with no files listed on the cmd line
+" autocmd vimenter * if !argc() | NERDTree | endif
 
 " ---------------------------------------------------------------------------
 " BufExplorer
@@ -212,31 +222,11 @@ endif
 " ---------------------------------------------------------------------------
 "  Directories
 " ---------------------------------------------------------------------------
-" set backupdir=~/tmp,/tmp
-" set undodir=~/.vim/.tmp,~/tmp,~/.tmp,/tmp
+set backupdir=~/tmp,/tmp
+set undodir=~/.vim/.tmp,~/tmp,~/.tmp,/tmp
 
 " Ctags path (brew install ctags)
 let Tlist_Ctags_Cmd = 'ctags'
-
-" ---------------------------------------------------------------------------
-"  vim-airline
-" ---------------------------------------------------------------------------
-" " Enable Powerline fonts
-" let g:airline_powerline_fonts = 1
-" " Change truncation widths
-" let g:airline#extensions#default#section_truncate_width
-"       \= {'b': 104, 'x': 60, 'y': 104, 'z': 45}
-
-" ---------------------------------------------------------------------------
-"  GitGutter
-" ---------------------------------------------------------------------------
-let g:gitgutter_enabled = 0       " Turned off by default
-let g:gitgutter_diff_args = '-w'  " Ignore whitespace
-
-" Highlight line colors:
-hi GitGutterAddLine    ctermfg=NONE ctermbg=238
-hi GitGutterChangeLine ctermfg=NONE ctermbg=238
-hi GitGutterDeleteLine ctermfg=NONE ctermbg=238
 
 " ---------------------------------------------------------------------------
 "  Gist
@@ -254,39 +244,52 @@ let g:pipe2eval_map_key = '!'
 
 
 " ---------------------------------------------------------------------------
-"  MultipleCursor
-" ---------------------------------------------------------------------------
-" let g:multi_cursor_start_key = '<C-n>      # - Default
-let g:multi_cursor_start_key = '<C-m>'
-
-" let g:multi_cursor_use_default_mapping = 0 " Toggle Default mappings
-" let g:multi_cursor_next_key='<C-n>'        # - Default
-" let g:multi_cursor_prev_key='<C-p>'        # - Default
-" let g:multi_cursor_skip_key='<C-x>'        # - Default
-" let g:multi_cursor_quit_key='<Esc>'        # - Default
-
-
-" ---------------------------------------------------------------------------
-"  MultipleCursor
-" ---------------------------------------------------------------------------
-" let g:multi_cursor_start_key = '<C-n>      # - Default
-let g:multi_cursor_start_key = '<C-m>'
-
-" let g:multi_cursor_use_default_mapping = 0 " Toggle Default mappings
-" let g:multi_cursor_next_key='<C-n>'        # - Default
-" let g:multi_cursor_prev_key='<C-p>'        # - Default
-" let g:multi_cursor_skip_key='<C-x>'        # - Default
-" let g:multi_cursor_quit_key='<Esc>'        # - Default
-
-" ---------------------------------------------------------------------------
 "  Misc
 " ---------------------------------------------------------------------------
 
 " Finally, load custom configs
-if filereadable(s:home_dir . '_vimrc.local')
-  source ~/_vimrc.local
+if filereadable(s:home_dir . '.vimrc.local')
+  source ~/.vimrc.local
 endif
 
 " When vimrc, either directly or via symlink, is edited, automatically reload it
 autocmd! bufwritepost .vimrc source %
 autocmd! bufwritepost vimrc source %
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"  Left over from un-used plugins
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" ---------------------------------------------------------------------------
+"  vim-airline
+" ---------------------------------------------------------------------------
+" " Enable Powerline fonts
+" let g:airline_powerline_fonts = 1
+" " Change truncation widths
+" let g:airline#extensions#default#section_truncate_width
+"       \= {'b': 104, 'x': 60, 'y': 104, 'z': 45}
+
+
+" ---------------------------------------------------------------------------
+"  MultipleCursor  " Not yet ready for prime-time
+" ---------------------------------------------------------------------------
+" let g:multi_cursor_use_default_mapping = 0  " Toggle Default mappings
+" let g:multi_cursor_start_key = '<C-m>'
+" let g:multi_cursor_start_key = '<C-n>       " - Default
+" let g:multi_cursor_next_key='<C-n>'         " - Default
+" let g:multi_cursor_prev_key='<C-p>'         " - Default
+" let g:multi_cursor_skip_key='<C-x>'         " - Default
+" let g:multi_cursor_quit_key='<Esc>'         " - Default
+
+
+" ---------------------------------------------------------------------------
+"  GitGutter  " Not using currently
+" ---------------------------------------------------------------------------
+" let g:gitgutter_enabled = 0       " Turned off by default
+" let g:gitgutter_diff_args = '-w'  " Ignore whitespace
+"
+" " Highlight line colors:
+" hi GitGutterAddLine    ctermfg=NONE ctermbg=238
+" hi GitGutterChangeLine ctermfg=NONE ctermbg=238
+" hi GitGutterDeleteLine ctermfg=NONE ctermbg=238
