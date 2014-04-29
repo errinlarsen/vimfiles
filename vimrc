@@ -1,9 +1,80 @@
-set nocompatible               " be iMproved
+set nocompatible               " be iMproved; required
 
 " ---------------------------------------------------------------------------
 "  Plugins
 " ---------------------------------------------------------------------------
-silent! runtime bundles.vim
+" silent! runtime bundles.vim  # old way
+
+filetype off                   " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Let Vundle manage Vundle; required
+Plugin 'gmarik/Vundle.vim'
+
+" General utility
+Plugin 'L9'
+Plugin 'textobj-user'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'rizzatti/funcoo.vim'
+Plugin 'shinokada/dragvisuals.vim'
+
+" UI enhancements
+Plugin 'chriskempson/base16-vim'
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+
+" Specific utilities
+Plugin 'scrooloose/nerdtree'
+Plugin 'bufexplorer.zip'
+Plugin 'rizzatti/dash.vim'
+Plugin 'sjl/gundo.vim'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'tpope/vim-fugitive'
+Plugin 'terryma/vim-multiple-cursors'
+
+" General Programming/Markup language helpers
+Plugin 'taglist.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'Townk/vim-autoclose'
+Plugin 'tpope/vim-surround'
+Plugin 'tomtom/tcomment_vim.git'
+
+" Specific Programming/Markup language helpers
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-rbenv'
+Plugin 'textobj-rubyblock'
+Plugin 'tpope/vim-rake'
+Plugin 'tpope/vim-endwise'
+Plugin 'tpope/vim-rails'
+Plugin 'skalnik/vim-vroom'
+Plugin 'tpope/vim-markdown'
+Plugin 'tpope/vim-haml'
+Plugin 'tpope/vim-bundler'
+
+" API wrappers
+"  gist-vim requirement:
+Plugin 'mattn/webapi-vim'
+Plugin 'mattn/gist-vim'
+
+" Below are plugins I'm not sure I use/want/need
+" Plugin 'airblade/vim-gitgutter'
+" Plugin 'bling/vim-airline'
+" Plugin 'ack.vim'
+" Plugin 'SuperTab'
+" Plugin 'panozzaj/vim-autocorrect'
+" Plugin 'sophacles/vim-bundle-sparkup'
+" Plugin 'greyblake/vim-preview'
+" Plugin 'garbas/vim-snipmate'
+" Plugin 'honza/vim-snippets'
+" Plugin 'YankRing.vim'
+" Plugin 'guns/xterm-color-table.vim'  " Can be helpful when picking colors
+
+" All Plugins must be added before the following line
+call vundle#end()          " required
+filetype plugin indent on  " required
 
 " ---------------------------------------------------------------------------
 "  General
