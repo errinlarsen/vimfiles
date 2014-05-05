@@ -20,20 +20,20 @@ Plugin 'textobj-user'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'rizzatti/funcoo.vim'
-Plugin 'shinokada/dragvisuals.vim'
 
 " UI enhancements
-Plugin 'chriskempson/base16-vim'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'chriskempson/base16-vim'
 
 " Specific utilities
-Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
 Plugin 'bufexplorer.zip'
+Plugin 'ack.vim'
+Plugin 'rking/ag.vim'
 Plugin 'rizzatti/dash.vim'
 Plugin 'sjl/gundo.vim'
-Plugin 'junegunn/vim-easy-align'
 Plugin 'tpope/vim-fugitive'
-Plugin 'terryma/vim-multiple-cursors'
+Plugin 'junegunn/vim-easy-align'
 
 " General Programming/Markup language helpers
 Plugin 'taglist.vim'
@@ -52,6 +52,7 @@ Plugin 'tpope/vim-rails'
 Plugin 'skalnik/vim-vroom'
 Plugin 'tpope/vim-markdown'
 Plugin 'tpope/vim-haml'
+Plugin 'slim-template/vim-slim'
 Plugin 'tpope/vim-bundler'
 
 " API wrappers
@@ -60,9 +61,10 @@ Plugin 'mattn/webapi-vim'
 Plugin 'mattn/gist-vim'
 
 " Below are plugins I'm not sure I use/want/need
+" Plugin 'scroolose/nerdtree'
+" Plugin 'terryma/vim-multiple-cursors'
 " Plugin 'airblade/vim-gitgutter'
 " Plugin 'bling/vim-airline'
-" Plugin 'ack.vim'
 " Plugin 'SuperTab'
 " Plugin 'panozzaj/vim-autocorrect'
 " Plugin 'sophacles/vim-bundle-sparkup'
@@ -151,7 +153,7 @@ set formatoptions=n
 set t_Co=256
 set background=dark " light is default
 let base16colorspace=256
-colorscheme base16-railscasts
+colorscheme base16-railscasts-modified
 
 " Cursor row/column colors:
 hi CursorLine ctermbg=235
