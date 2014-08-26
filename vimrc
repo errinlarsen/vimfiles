@@ -1,9 +1,9 @@
-set nocompatible               " be iMproved; required
+set nocompatible               " be iMproved; required by Vundle
 
 " ===========================================================================
 "  Vundle config
 " ===========================================================================
-filetype off                   " required
+filetype off                   " required by Vundle
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -27,14 +27,17 @@ Plugin 'chriskempson/base16-vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'bufexplorer.zip'
 Plugin 'rking/ag.vim'
-Plugin 'rizzatti/dash.vim'
-Plugin 'sjl/gundo.vim'
+Plugin 'tpope/vim-vinegar'
 Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-repeat'
 Plugin 'junegunn/vim-easy-align'
+Plugin 'sjl/gundo.vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'majutsushi/tagbar'
+Plugin 'tpope/vim-dispatch'
 
 " General Programming/Markup language helpers
-Plugin 'taglist.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'Townk/vim-autoclose'
 Plugin 'tpope/vim-surround'
@@ -53,11 +56,6 @@ Plugin 'tpope/vim-haml'
 Plugin 'slim-template/vim-slim'
 Plugin 'tpope/vim-bundler'
 
-" API wrappers
-"  gist-vim requirement:
-Plugin 'mattn/webapi-vim'
-Plugin 'mattn/gist-vim'
-
 " Below are plugins I'm not sure I use/want/need
 " Plugin 'ack.vim'
 " Plugin 'scroolose/nerdtree'
@@ -70,6 +68,14 @@ Plugin 'mattn/gist-vim'
 " Plugin 'garbas/vim-snipmate'
 " Plugin 'honza/vim-snippets'
 " Plugin 'YankRing.vim'
+" Plugin 'rizzatti/dash.vim'
+" Plugin 'taglist.vim'
+" Plugin 'rhysd/clever-f.vim'
+
+" API wrappers
+" Plugin 'mattn/gist-vim'
+" - gist-vim requirement:
+" Plugin 'mattn/webapi-vim'
 
 " Can be helpful when picking colors:
 " Plugin 'guns/xterm-color-table.vim'
@@ -144,7 +150,8 @@ set undofile
 set previewheight=24
 set splitbelow splitright
 
-set textwidth=79
+set linebreak
+set textwidth=80
 set formatoptions=n
 
 
@@ -177,7 +184,8 @@ hi CursorColumn guibg=#262626, ctermbg=235
 
 " check to make sure vim has been compiled with colorcolumn
 if exists("+colorcolumn")
-  set colorcolumn=81
+  set colorcolumn=+1,+2,+3,+4,+5,+6
+  " execute "set colorcolumn=" . join(map(range(2,259), '"+" . v:val'), ',')
 endif
 
 
@@ -226,7 +234,8 @@ set undodir=~/.vim/.tmp,~/tmp,~/.tmp,/tmp
 set showmatch
 
 " Ignore some binary, versioning and backup files when auto-completing
-set wildignore=.svn,CVS,.git,*.swp,*.jpg,*.png,*.gif,*.pdf,*.bak
+" set wildignore=.svn,CVS,*.swp,*.jpg,*.png,*.gif,*.pdf,*.bak
+
 " Set a lower priority for .old files
 set suffixes+=.old
 
@@ -282,16 +291,14 @@ let g:ctrlp_open_multiple_files = '1vr'
 
 
 " ---------------------------------------------------------------------------
-"  Gist
+"  Fugitive
 " ---------------------------------------------------------------------------
-let g:gist_post_private = 1                  " private gists by default
-let g:gist_open_browser_after_post = 1       " open browser after posting
-let g:gist_browser_command = 'open %URL% &'  " use `open` for Gist URLs
-let g:gist_get_multiplefile = 1              " open all files if more than one
-
+augroup ErrinsFugitiveCommit
+  autocmd FileType gitcommit setlocal textwidth=72
+augroup END
 
 " ---------------------------------------------------------------------------
-"  GitGutter  " Not using currently
+"  GitGutter
 " ---------------------------------------------------------------------------
 " GitGutter is on/off by default
 " let g:gitgutter_enabled = 0           " Default: 1 (on)
@@ -307,6 +314,9 @@ let g:gitgutter_diff_args = '-w'        " Ignore whitespace
 
 " Show signs by default
 " let g:gitgutter_signs = 0             " Default: 1 (on)
+
+" Always show the sign column
+let g:gitgutter_sign_column_always = 1  " Default: 0 (off)
 
 " Turn on line highlighting by default
 " let g:gitgutter_highlight_lines = 1   " Default: 0 (off)
@@ -350,21 +360,16 @@ augroup END
 
 
 " ---------------------------------------------------------------------------
-" TagList
+" TagBar
 " ---------------------------------------------------------------------------
-set tags=./tags;
-set tags+=gems.tags
+" open Tagbar on the left
+let g:tagbar_left = 1
 
-" Ctags path (brew install ctags)
-let Tlist_Ctags_Cmd = 'ctags'
+" auto-close Tagbar when tag selected
+let g:tagbar_autoclose = 1
 
-let Tlist_Use_Right_Window = 1
-let Tlist_WinWidth = 60
-
-" Use only current file to autocomplete from tags
-" set complete=.,t
-set complete=.,w,b,u,t,i
-
+" sort tags by source-file order by default
+let g:tagbar_sort = 0
 
 " ---------------------------------------------------------------------------
 "  Misc
@@ -381,10 +386,18 @@ augroup ErrinsVimrcAuGroup
   autocmd bufwritepost .vimrc,vimrc nested source %
 augroup END
 
-
 " ===========================================================================
 " Config options for plugins not being used
 " ===========================================================================
+" ---------------------------------------------------------------------------
+"  Gist
+" ---------------------------------------------------------------------------
+" let g:gist_post_private = 1                  " private gists by default
+" let g:gist_open_browser_after_post = 1       " open browser after posting
+" let g:gist_browser_command = 'open %URL% &'  " use `open` for Gist URLs
+" let g:gist_get_multiplefile = 1              " open all files if more than one
+
+
 " ---------------------------------------------------------------------------
 "  MultipleCursor  " Not yet ready for prime-time
 " ---------------------------------------------------------------------------
@@ -417,3 +430,29 @@ augroup END
 "  Pipe2Eval
 " ---------------------------------------------------------------------------
 " let g:pipe2eval_map_key = '!'
+
+
+" ---------------------------------------------------------------------------
+" TagList
+" ---------------------------------------------------------------------------
+" set tags=./tags;
+" set tags+=gems.tags
+"
+" " Ctags path (brew install ctags)
+" let Tlist_Ctags_Cmd = 'ctags'
+"
+" let Tlist_Use_Right_Window = 1
+" let Tlist_WinWidth = 60
+"
+" " Use only current file to autocomplete from tags
+" " set complete=.,t
+" set complete=.,w,b,u,t,i
+
+
+" ---------------------------------------------------------------------------
+" Clever-F
+" ---------------------------------------------------------------------------
+" let g:clever_f_fix_key_direction = 1       " Always search forward/back with f/F
+" let g:clever_f_chars_match_any_signs = ';' " match any/all signs with f;
+
+

@@ -38,8 +38,8 @@ nnoremap  <C-k>             <C-w>k
 nnoremap  <C-l>             <C-w>l
 
 " Move between tabs
-nnoremap  <Bslash>          gt
-nnoremap  <Bar>             gT
+" nnoremap  <Bslash>          gt
+" nnoremap  <Bar>             gT
 
 " Center screen when scrolling search results
 nmap      n                 nzz
@@ -121,9 +121,6 @@ nmap <Leader>a <Plug>(EasyAlign)
 nnoremap  //                :TComment<CR>
 vnoremap  //                :TComment<CR>
 
-" Support for https://github.com/ivalkeen/guard-ctags-bundler
-map       <Leader>l         :TlistToggle <cr>
-
 " " Generate ctags for all bundled gems as well
 " map     <Leader>rt        :!ctags --extra=+f --languages=-javascript
 "                           \ --exclude=.git --exclude=log -R *
@@ -140,7 +137,7 @@ map       <Leader>l         :TlistToggle <cr>
 " map <c-space> ?
 
 " Search using :Ag (i.e. The Silver Searcher)
-nnoremap <Leader>ag :Ag<SPACE>
+nnoremap <Leader>ag         :Ag<SPACE>
 
 " turn current search highlight off
 nnoremap  <Leader><Space>   :noh<CR>
@@ -150,7 +147,6 @@ nnoremap  <Leader>w         :%s/\s\+$//e<CR>
 
 " Highlight Merge-conflicts
 nnoremap  <Leader>mc        /<<<<<\\|=====\\|>>>>><CR>
-
 
 " ---------------------------------------------------------------------------
 "  vim.wikia.com/wiki/Short_mappings_for_common_tasks
@@ -162,14 +158,8 @@ vmap < <gv
 " Record into register 'q', playback with 'Q'
 nnoremap Q @q
 
-" Swap ';' with ':' for easier access to command mode
-" nnoremap ; :
-" vnoremap ; :
-" nnoremap : ;
-" vnoremap : ;
-
-" Disable 'q:' - what I really wanted/needed
-nmap q: <nop>
+" Disable 'q:' - I never use it and I always get annoyed when I hit it
+map q: <nop>
 
 
 " ---------------------------------------------------------------------------
@@ -186,6 +176,12 @@ noremap   <Leader>T         :VroomRunNearestTest<CR>
 " noremap   <C-g><C-g>        :GitGutterToggle<CR> <Bar> :GitGutterLineHighlightsToggle<CR>
 noremap   <C-g><C-g>        :GitGutterLineHighlightsToggle<CR>
 
+" Toggle Gundo
+nnoremap <Leader>gu :GundoToggle<CR>
+
+" Toggle Tagbar
+nnoremap <Leader>tb :TagbarToggle<CR>
+
 
 " ---------------------------------------------------------------------------
 "  Left-overs
@@ -200,3 +196,5 @@ noremap   <C-g><C-g>        :GitGutterLineHighlightsToggle<CR>
 " " F3 - YankRing
 " nnoremap <silent> <F3> :YRShow<cr>
 " inoremap <silent> <F3> <ESC>:YRShow<cr>
+
+" vim: set tw=78 et ft=vim:
