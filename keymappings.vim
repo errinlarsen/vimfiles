@@ -37,6 +37,14 @@ nnoremap  <C-j>             <C-w>j
 nnoremap  <C-k>             <C-w>k
 nnoremap  <C-l>             <C-w>l
 
+" Scrolling (because: CTRL keys Sux0rs && RSI)
+"         <C-y>                   " Scroll screen up one line
+"         <C-u>                   " Scroll up half a window
+"         <C-m>                   " Scroll down half a window
+nnoremap  <C-m>             <C-d>
+"         <C-n>                   " Scroll screen down one line
+nnoremap  <C-n>             <C-e>
+
 " Move between tabs
 " nnoremap  <Bslash>          gt
 " nnoremap  <Bar>             gT
@@ -67,6 +75,9 @@ noremap   <Leader>bu        :bun<cr>
 
 " Wipeout buffer
 noremap   <Leader>bw        :bw<cr>
+
+" Window commands
+nnoremap  <Leader>w         <C-w>
 
 " Create new tab
 map       <Esc>t            :tabnew<cr>
@@ -143,7 +154,7 @@ nnoremap <Leader>ag         :Ag<SPACE>
 nnoremap  <Leader><Space>   :noh<CR>
 
 " Remove trailing whitespace
-nnoremap  <Leader>w         :%s/\s\+$//e<CR>
+nnoremap  <Leader>tw         :%s/\s\+$//e<CR>:let @/=''<CR>
 
 " Highlight Merge-conflicts
 nnoremap  <Leader>mc        /<<<<<\\|=====\\|>>>>><CR>

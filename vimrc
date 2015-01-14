@@ -20,7 +20,7 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'rizzatti/funcoo.vim'
 
 " UI enhancements
-Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+" Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'chriskempson/base16-vim'
 
 " Specific utilities
@@ -36,6 +36,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-dispatch'
+Plugin 'rhysd/clever-f.vim'
 
 " General Programming/Markup language helpers
 Plugin 'scrooloose/syntastic'
